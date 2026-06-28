@@ -1,34 +1,1326 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>My Website</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Arafath Hossain, iOS Engineer with 4 years of experience building SmartThings app experiences.">
+    <title>Arafath Hossain | iOS Engineer</title>
     <style>
+        :root {
+            --ink: #151817;
+            --muted: #66706b;
+            --paper: #f7f8f5;
+            --panel: #ffffff;
+            --line: rgba(21, 24, 23, 0.12);
+            --green: #0d8f70;
+            --aqua: #0c6f78;
+            --coral: #e45a3b;
+            --gold: #c58a16;
+            --charcoal: #101312;
+            --radius: 8px;
+            --shadow: 0 22px 70px rgba(18, 24, 22, 0.18);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: Arial;
-            text-align: center;
-            margin-top: 100px;
-            background: #f5f5f5;
+            margin: 0;
+            color: var(--ink);
+            background: var(--paper);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        img,
+        svg {
+            display: block;
+            max-width: 100%;
+        }
+
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+            background: rgba(16, 19, 18, 0.82);
+            color: #fff;
+            backdrop-filter: blur(18px);
+        }
+
+        .nav {
+            width: min(1120px, calc(100% - 36px));
+            min-height: 68px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 750;
+        }
+
+        .brand-mark {
+            width: 34px;
+            height: 34px;
+            display: grid;
+            place-items: center;
+            border-radius: 8px;
+            background: #fff;
+            color: var(--charcoal);
+            font-size: 0.88rem;
+            line-height: 1;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.94rem;
+            color: rgba(255, 255, 255, 0.78);
+        }
+
+        .nav-links a {
+            border-radius: 999px;
+            padding: 8px 12px;
+            transition: background 180ms ease, color 180ms ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a:focus-visible {
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+            outline: none;
+        }
+
+        .hero {
+            position: relative;
+            min-height: 82svh;
+            overflow: hidden;
+            color: #fff;
+            background:
+                linear-gradient(110deg, rgba(16, 19, 18, 0.98) 0%, rgba(16, 19, 18, 0.94) 42%, rgba(16, 19, 18, 0.62) 72%),
+                #101312;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+            background-size: 72px 72px;
+            mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.75), transparent 88%);
+            pointer-events: none;
+        }
+
+        .hero-inner {
+            position: relative;
+            z-index: 2;
+            width: min(1120px, calc(100% - 36px));
+            min-height: calc(82svh - 68px);
+            margin: 0 auto;
+            display: grid;
+            align-items: center;
+            padding: 76px 0 86px;
+        }
+
+        .hero-copy {
+            max-width: 780px;
+        }
+
+        .eyebrow {
+            margin: 0 0 14px;
+            color: #a7efe0;
+            font-size: 0.96rem;
+            font-weight: 750;
+        }
+
+        h1,
+        h2,
+        h3,
+        p {
+            margin-top: 0;
         }
 
         h1 {
-            color: #0077cc;
+            max-width: 780px;
+            margin-bottom: 18px;
+            font-size: clamp(3.25rem, 8vw, 5.9rem);
+            line-height: 0.98;
+            letter-spacing: 0;
         }
 
-        button {
-            padding: 10px 20px;
-            font-size: 18px;
-            cursor: pointer;
+        .hero-lede {
+            max-width: 670px;
+            margin-bottom: 28px;
+            color: rgba(255, 255, 255, 0.82);
+            font-size: clamp(1.08rem, 1.8vw, 1.32rem);
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 34px;
+        }
+
+        .button {
+            min-height: 48px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            border: 1px solid transparent;
+            border-radius: 999px;
+            padding: 12px 18px;
+            font-weight: 750;
+            transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+        }
+
+        .button:hover,
+        .button:focus-visible {
+            transform: translateY(-2px);
+            outline: none;
+        }
+
+        .button.primary {
+            background: #ffffff;
+            color: var(--charcoal);
+        }
+
+        .button.secondary {
+            border-color: rgba(255, 255, 255, 0.28);
+            color: #fff;
+        }
+
+        .button.secondary:hover,
+        .button.secondary:focus-visible {
+            background: rgba(255, 255, 255, 0.11);
+        }
+
+        .button svg {
+            width: 18px;
+            height: 18px;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            fill: none;
+        }
+
+        .proof-points {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(120px, 1fr));
+            max-width: 760px;
+            gap: 14px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .proof-points li {
+            min-height: 84px;
+            border-left: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 2px 18px;
+        }
+
+        .proof-points strong {
+            display: block;
+            margin-bottom: 4px;
+            color: #fff;
+            font-size: clamp(1.32rem, 2.3vw, 1.82rem);
+            line-height: 1.1;
+        }
+
+        .proof-points span {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.94rem;
+        }
+
+        .device-scene {
+            position: absolute;
+            z-index: 1;
+            right: max(18px, calc((100vw - 1120px) / 2));
+            top: 90px;
+            width: min(48vw, 540px);
+            height: 620px;
+            opacity: 0.96;
+            pointer-events: none;
+        }
+
+        .phone {
+            position: absolute;
+            right: 86px;
+            top: 12px;
+            width: 288px;
+            aspect-ratio: 0.49;
+            border: 12px solid #191d1b;
+            border-radius: 44px;
+            background: #eef4f0;
+            box-shadow: var(--shadow);
+            transform: rotate(4deg);
+        }
+
+        .phone::before {
+            content: "";
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            width: 82px;
+            height: 24px;
+            border-radius: 999px;
+            background: #191d1b;
+            transform: translateX(-50%);
+            z-index: 3;
+        }
+
+        .screen {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            border-radius: 32px;
+            background: #f7fbf8;
+            color: #17201c;
+        }
+
+        .screen-header {
+            padding: 54px 20px 14px;
+            background: #e7f4ef;
+        }
+
+        .screen-header span {
+            display: block;
+            color: #67746d;
+            font-size: 0.72rem;
+            font-weight: 700;
+        }
+
+        .screen-header strong {
+            display: block;
+            margin-top: 5px;
+            font-size: 1.28rem;
+            line-height: 1.15;
+        }
+
+        .room-tabs {
+            display: flex;
+            gap: 7px;
+            padding: 14px 16px 10px;
+        }
+
+        .room-tabs span {
+            border-radius: 999px;
+            padding: 6px 10px;
+            background: #e8ece9;
+            color: #4d5953;
+            font-size: 0.68rem;
+            font-weight: 750;
+        }
+
+        .room-tabs span:first-child {
+            background: #141817;
+            color: #fff;
+        }
+
+        .device-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            padding: 4px 16px 16px;
+        }
+
+        .device-tile {
+            min-height: 96px;
+            border: 1px solid rgba(21, 24, 23, 0.08);
+            border-radius: 18px;
+            padding: 12px;
+            background: #fff;
+            box-shadow: 0 12px 24px rgba(21, 24, 23, 0.08);
+        }
+
+        .tile-icon {
+            width: 30px;
+            height: 30px;
+            margin-bottom: 12px;
+            border-radius: 10px;
+            background: #e6f5ef;
+            position: relative;
+        }
+
+        .tile-icon::after {
+            content: "";
+            position: absolute;
+            inset: 9px;
+            border-radius: 50%;
+            background: var(--green);
+        }
+
+        .device-tile:nth-child(2) .tile-icon {
+            background: #fff0e9;
+        }
+
+        .device-tile:nth-child(2) .tile-icon::after {
+            background: var(--coral);
+        }
+
+        .device-tile:nth-child(3) .tile-icon {
+            background: #e7f1f2;
+        }
+
+        .device-tile:nth-child(3) .tile-icon::after {
+            background: var(--aqua);
+        }
+
+        .device-tile:nth-child(4) .tile-icon {
+            background: #fff7df;
+        }
+
+        .device-tile:nth-child(4) .tile-icon::after {
+            background: var(--gold);
+        }
+
+        .device-tile strong,
+        .device-tile span {
+            display: block;
+            line-height: 1.25;
+        }
+
+        .device-tile strong {
+            font-size: 0.82rem;
+        }
+
+        .device-tile span {
+            margin-top: 4px;
+            color: #69736e;
+            font-size: 0.7rem;
+        }
+
+        .floating-panel {
+            position: absolute;
+            left: 10px;
+            bottom: 72px;
+            width: 240px;
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            border-radius: 24px;
+            padding: 18px;
+            background: rgba(255, 255, 255, 0.88);
+            color: #17201c;
+            box-shadow: var(--shadow);
+            transform: rotate(-5deg);
+        }
+
+        .floating-panel small {
+            display: block;
+            color: #65706b;
+            font-weight: 750;
+        }
+
+        .floating-panel strong {
+            display: block;
+            margin-top: 4px;
+            font-size: 1rem;
+        }
+
+        .automation-bar {
+            height: 10px;
+            margin-top: 16px;
+            overflow: hidden;
+            border-radius: 999px;
+            background: #dfe5e1;
+        }
+
+        .automation-bar span {
+            display: block;
+            width: 76%;
+            height: 100%;
+            border-radius: inherit;
+            background: linear-gradient(90deg, var(--green), var(--aqua), var(--coral));
+        }
+
+        main {
+            position: relative;
+        }
+
+        section {
+            padding: 88px 0;
+        }
+
+        section.hero {
+            padding: 0;
+        }
+
+        .section-inner {
+            width: min(1120px, calc(100% - 36px));
+            margin: 0 auto;
+        }
+
+        .section-heading {
+            display: grid;
+            grid-template-columns: minmax(0, 0.9fr) minmax(280px, 1fr);
+            gap: 44px;
+            align-items: end;
+            margin-bottom: 42px;
+        }
+
+        .kicker {
+            margin-bottom: 10px;
+            color: var(--green);
+            font-size: 0.92rem;
+            font-weight: 800;
+        }
+
+        h2 {
+            margin-bottom: 0;
+            font-size: clamp(2rem, 4vw, 4.2rem);
+            line-height: 1.03;
+            letter-spacing: 0;
+        }
+
+        .section-heading p {
+            margin-bottom: 0;
+            color: var(--muted);
+            font-size: 1.04rem;
+        }
+
+        .impact {
+            background: #fff;
+        }
+
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .impact-card,
+        .project-card,
+        .contact-card {
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background: var(--panel);
+        }
+
+        .impact-card {
+            min-height: 260px;
+            padding: 26px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .impact-icon {
+            width: 46px;
+            height: 46px;
+            display: grid;
+            place-items: center;
+            border-radius: 8px;
+            background: #e7f4ef;
+            color: var(--green);
+        }
+
+        .impact-card:nth-child(2) .impact-icon {
+            background: #fff0e9;
+            color: var(--coral);
+        }
+
+        .impact-card:nth-child(3) .impact-icon {
+            background: #e7f1f2;
+            color: var(--aqua);
+        }
+
+        .impact-icon svg {
+            width: 23px;
+            height: 23px;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            fill: none;
+        }
+
+        .impact-card h3,
+        .project-card h3,
+        .timeline h3 {
+            margin-bottom: 10px;
+            font-size: 1.28rem;
+            line-height: 1.2;
+            letter-spacing: 0;
+        }
+
+        .impact-card p,
+        .project-card p,
+        .timeline p,
+        .contact-card p {
+            color: var(--muted);
+        }
+
+        .experience {
+            background: #eef6f1;
+        }
+
+        .timeline {
+            display: grid;
+            grid-template-columns: 320px minmax(0, 1fr);
+            gap: 28px;
+            align-items: start;
+            border-top: 1px solid rgba(21, 24, 23, 0.16);
+            padding-top: 34px;
+        }
+
+        .role-meta {
+            position: sticky;
+            top: 104px;
+        }
+
+        .role-meta span {
+            display: inline-flex;
+            margin-bottom: 12px;
+            border-radius: 999px;
+            padding: 6px 10px;
+            background: #ffffff;
+            color: var(--green);
+            font-size: 0.84rem;
+            font-weight: 800;
+        }
+
+        .role-meta h3 {
+            margin-bottom: 8px;
+        }
+
+        .role-meta p {
+            margin-bottom: 0;
+        }
+
+        .work-list {
+            display: grid;
+            gap: 14px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .work-list li {
+            border: 1px solid rgba(21, 24, 23, 0.12);
+            border-radius: var(--radius);
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.74);
+        }
+
+        .work-list strong {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 1.02rem;
+        }
+
+        .work-list span {
+            color: var(--muted);
+        }
+
+        .stack {
+            background: #fff;
+        }
+
+        .stack-layout {
+            display: grid;
+            grid-template-columns: 0.9fr 1.1fr;
+            gap: 34px;
+            align-items: stretch;
+        }
+
+        .stack-feature {
+            border-radius: var(--radius);
+            padding: 34px;
+            background: var(--charcoal);
+            color: #fff;
+        }
+
+        .stack-feature h2 {
+            margin-bottom: 18px;
+            font-size: clamp(2rem, 3.5vw, 3.6rem);
+        }
+
+        .stack-feature p {
+            color: rgba(255, 255, 255, 0.76);
+        }
+
+        .skill-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 28px;
+        }
+
+        .skill-cloud span {
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 999px;
+            padding: 8px 12px;
+            color: rgba(255, 255, 255, 0.86);
+            font-size: 0.92rem;
+        }
+
+        .stack-columns {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .stack-group {
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            padding: 24px;
+            background: #fff;
+        }
+
+        .stack-group h3 {
+            margin-bottom: 14px;
+            font-size: 1.05rem;
+        }
+
+        .stack-group ul {
+            display: grid;
+            gap: 10px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            color: var(--muted);
+        }
+
+        .stack-group li {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+        }
+
+        .stack-group li::before {
+            content: "";
+            flex: 0 0 auto;
+            width: 7px;
+            height: 7px;
+            margin-top: 9px;
+            border-radius: 50%;
+            background: var(--green);
+        }
+
+        .stack-group:nth-child(2) li::before {
+            background: var(--coral);
+        }
+
+        .stack-group:nth-child(3) li::before {
+            background: var(--aqua);
+        }
+
+        .stack-group:nth-child(4) li::before {
+            background: var(--gold);
+        }
+
+        .projects {
+            background: #f7f8f5;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .project-card {
+            min-height: 340px;
+            overflow: hidden;
+        }
+
+        .project-visual {
+            min-height: 138px;
+            padding: 18px;
+            display: flex;
+            align-items: flex-end;
+            background: #16201c;
+            color: #fff;
+        }
+
+        .project-card:nth-child(2) .project-visual {
+            background: #24342f;
+        }
+
+        .project-card:nth-child(3) .project-visual {
+            background: #17393e;
+        }
+
+        .project-visual span {
+            border-radius: 999px;
+            padding: 6px 10px;
+            background: rgba(255, 255, 255, 0.12);
+            font-size: 0.82rem;
+            font-weight: 800;
+        }
+
+        .project-body {
+            padding: 24px;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 20px;
+        }
+
+        .project-tags span {
+            border-radius: 999px;
+            padding: 6px 9px;
+            background: #edf1ee;
+            color: #516058;
+            font-size: 0.78rem;
+            font-weight: 700;
+        }
+
+        .contact {
+            padding-bottom: 104px;
+            background: var(--charcoal);
+            color: #fff;
+        }
+
+        .contact .section-heading p,
+        .contact-card p {
+            color: rgba(255, 255, 255, 0.72);
+        }
+
+        .contact .kicker {
+            color: #a7efe0;
+        }
+
+        .contact-card {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 24px;
+            align-items: center;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.16);
+        }
+
+        .contact-card h3 {
+            margin-bottom: 8px;
+            font-size: clamp(1.5rem, 3vw, 2.35rem);
+            line-height: 1.12;
+        }
+
+        .footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 24px 0;
+            background: var(--charcoal);
+            color: rgba(255, 255, 255, 0.58);
+            font-size: 0.92rem;
+        }
+
+        .footer-inner {
+            width: min(1120px, calc(100% - 36px));
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            gap: 18px;
+        }
+
+        @media (max-width: 960px) {
+            .nav {
+                min-height: 64px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero-inner {
+                padding: 64px 0 74px;
+            }
+
+            .device-scene {
+                right: -42px;
+                top: 84px;
+                width: min(60vw, 430px);
+                height: 520px;
+                opacity: 0.34;
+            }
+
+            .phone {
+                right: 24px;
+                width: 235px;
+            }
+
+            .floating-panel {
+                left: 4px;
+                bottom: 54px;
+            }
+
+            .proof-points,
+            .impact-grid,
+            .project-grid,
+            .section-heading,
+            .timeline,
+            .stack-layout,
+            .stack-columns,
+            .contact-card {
+                grid-template-columns: 1fr;
+            }
+
+            .role-meta {
+                position: static;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .nav,
+            .section-inner,
+            .hero-inner,
+            .footer-inner {
+                width: min(100% - 28px, 1120px);
+            }
+
+            .hero-inner {
+                padding: 40px 0 42px;
+            }
+
+            h1 {
+                font-size: clamp(3rem, 17vw, 4.2rem);
+            }
+
+            section {
+                padding: 64px 0;
+            }
+
+            .proof-points {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .proof-points li {
+                min-height: 82px;
+                padding-left: 12px;
+            }
+
+            .actions {
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 10px;
+            }
+
+            .button {
+                width: auto;
+                min-height: 46px;
+                padding: 10px 12px;
+                font-size: 0.92rem;
+            }
+
+            .device-scene {
+                right: -46px;
+                top: 82px;
+                width: 330px;
+                height: 360px;
+                opacity: 0.24;
+            }
+
+            .phone {
+                right: 0;
+                top: 6px;
+                width: 190px;
+                border-width: 10px;
+                border-radius: 38px;
+            }
+
+            .screen {
+                border-radius: 28px;
+            }
+
+            .floating-panel {
+                display: none;
+            }
+
+            .device-grid {
+                gap: 8px;
+                padding-inline: 12px;
+            }
+
+            .device-tile {
+                min-height: 82px;
+                padding: 10px;
+            }
+
+            .tile-icon {
+                width: 26px;
+                height: 26px;
+                margin-bottom: 8px;
+            }
+
+            .contact-card {
+                padding: 24px;
+            }
+
+            .footer-inner {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
 <body>
+    <header class="site-header" aria-label="Site header">
+        <nav class="nav" aria-label="Primary navigation">
+            <a class="brand" href="#top" aria-label="Arafath Hossain home">
+                <span class="brand-mark">AH</span>
+                <span>Arafath Hossain</span>
+            </a>
+            <div class="nav-links" aria-label="Page sections">
+                <a href="#impact">Impact</a>
+                <a href="#experience">Experience</a>
+                <a href="#stack">Stack</a>
+                <a href="#work">Work</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </nav>
+    </header>
 
-<h1>Hello 👋</h1>
-<p>Welcome to my GitHub Pages website.</p>
+    <main id="top">
+        <section class="hero" aria-labelledby="hero-title">
+            <div class="device-scene" aria-hidden="true">
+                <div class="phone">
+                    <div class="screen">
+                        <div class="screen-header">
+                            <span>Connected home</span>
+                            <strong>Morning is ready</strong>
+                        </div>
+                        <div class="room-tabs">
+                            <span>Home</span>
+                            <span>Living</span>
+                            <span>Energy</span>
+                        </div>
+                        <div class="device-grid">
+                            <div class="device-tile">
+                                <div class="tile-icon"></div>
+                                <strong>Lights</strong>
+                                <span>18 devices</span>
+                            </div>
+                            <div class="device-tile">
+                                <div class="tile-icon"></div>
+                                <strong>Climate</strong>
+                                <span>Comfort</span>
+                            </div>
+                            <div class="device-tile">
+                                <div class="tile-icon"></div>
+                                <strong>Security</strong>
+                                <span>Armed</span>
+                            </div>
+                            <div class="device-tile">
+                                <div class="tile-icon"></div>
+                                <strong>Scenes</strong>
+                                <span>8 active</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="floating-panel">
+                    <small>Automation health</small>
+                    <strong>Fast, calm, reliable controls</strong>
+                    <div class="automation-bar"><span></span></div>
+                </div>
+            </div>
 
-<button onclick="alert('Thanks for visiting!')">
-Click Me
-</button>
+            <div class="hero-inner">
+                <div class="hero-copy">
+                    <p class="eyebrow">iOS Engineer for connected home experiences</p>
+                    <h1 id="hero-title">Arafath Hossain</h1>
+                    <p class="hero-lede">
+                        I build polished, reliable iOS experiences shaped by 4 years of work on the SmartThings app, with a focus on performance, clean architecture, and interfaces people can trust every day.
+                    </p>
+                    <div class="actions" aria-label="Primary actions">
+                        <a class="button primary" href="#work">
+                            View work
+                            <svg aria-hidden="true" viewBox="0 0 24 24">
+                                <path d="M5 12h14"></path>
+                                <path d="m13 6 6 6-6 6"></path>
+                            </svg>
+                        </a>
+                        <a class="button secondary" href="https://github.com/aarafathh" target="_blank" rel="noreferrer">
+                            GitHub
+                            <svg aria-hidden="true" viewBox="0 0 24 24">
+                                <path d="M7 17 17 7"></path>
+                                <path d="M9 7h8v8"></path>
+                            </svg>
+                        </a>
+                    </div>
+                    <ul class="proof-points" aria-label="Professional highlights">
+                        <li>
+                            <strong>4+</strong>
+                            <span>years iOS</span>
+                        </li>
+                        <li>
+                            <strong>SmartThings</strong>
+                            <span>app experience</span>
+                        </li>
+                        <li>
+                            <strong>Swift</strong>
+                            <span>UIKit, SwiftUI</span>
+                        </li>
+                        <li>
+                            <strong>Quality</strong>
+                            <span>release care</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
 
+        <section class="impact" id="impact" aria-labelledby="impact-title">
+            <div class="section-inner">
+                <div class="section-heading">
+                    <div>
+                        <p class="kicker">What I Bring</p>
+                        <h2 id="impact-title">iOS craft for products that live in the real world.</h2>
+                    </div>
+                    <p>
+                        Connected home software has to feel effortless while handling device state, latency, onboarding, permissions, edge cases, and trust. That is the kind of product surface I like working on.
+                    </p>
+                </div>
+                <div class="impact-grid">
+                    <article class="impact-card">
+                        <div class="impact-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M5 12.5 10 17 19 7"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3>Reliable user flows</h3>
+                            <p>Experience with setup, control, and automation journeys where clear feedback and graceful failure states matter.</p>
+                        </div>
+                    </article>
+                    <article class="impact-card">
+                        <div class="impact-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 3v18"></path>
+                                <path d="M6 8h12"></path>
+                                <path d="M8 16h8"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3>Scalable app architecture</h3>
+                            <p>Comfortable organizing features around maintainable state, dependency boundaries, testable units, and readable Swift.</p>
+                        </div>
+                    </article>
+                    <article class="impact-card">
+                        <div class="impact-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M4 14a8 8 0 1 1 16 0"></path>
+                                <path d="M12 14 16 9"></path>
+                                <path d="M8 18h8"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3>Performance-minded polish</h3>
+                            <p>Focused on responsive screens, smooth interaction details, and practical debugging across complex product states.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="experience" id="experience" aria-labelledby="experience-title">
+            <div class="section-inner">
+                <div class="section-heading">
+                    <div>
+                        <p class="kicker">Experience</p>
+                        <h2 id="experience-title">Four years in the SmartThings iOS ecosystem.</h2>
+                    </div>
+                    <p>
+                        My background is strongest where native iOS engineering meets consumer-grade reliability: thoughtful UI, stable releases, and product behavior that stays understandable under real device conditions.
+                    </p>
+                </div>
+                <div class="timeline">
+                    <div class="role-meta">
+                        <span>iOS Engineer</span>
+                        <h3>SmartThings app</h3>
+                        <p>Native iOS development for connected home control, automation, and device-driven app experiences.</p>
+                    </div>
+                    <ul class="work-list">
+                        <li>
+                            <strong>Feature implementation</strong>
+                            <span>Built and refined native iOS surfaces for smart-home experiences, balancing product detail with platform conventions.</span>
+                        </li>
+                        <li>
+                            <strong>State and feedback design</strong>
+                            <span>Worked with async states, device availability, loading, errors, permissions, and user feedback across practical home scenarios.</span>
+                        </li>
+                        <li>
+                            <strong>Release quality</strong>
+                            <span>Supported maintainable code, debugging, reviews, regressions, and edge-case handling in a mature app environment.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="stack" id="stack" aria-labelledby="stack-title">
+            <div class="section-inner stack-layout">
+                <div class="stack-feature">
+                    <p class="kicker">Technical Stack</p>
+                    <h2 id="stack-title">Native iOS, practical architecture, product empathy.</h2>
+                    <p>
+                        I like building software that feels calm on the surface because the details underneath are well considered: clear state, predictable navigation, measured performance, and code that teammates can keep improving.
+                    </p>
+                    <div class="skill-cloud" aria-label="Core skills">
+                        <span>Swift</span>
+                        <span>UIKit</span>
+                        <span>SwiftUI</span>
+                        <span>Combine</span>
+                        <span>MVVM</span>
+                        <span>REST APIs</span>
+                        <span>Git</span>
+                    </div>
+                </div>
+                <div class="stack-columns">
+                    <div class="stack-group">
+                        <h3>iOS Development</h3>
+                        <ul>
+                            <li>Swift, UIKit, SwiftUI, Auto Layout</li>
+                            <li>Navigation, reusable UI, accessibility basics</li>
+                            <li>App lifecycle, permissions, local state</li>
+                        </ul>
+                    </div>
+                    <div class="stack-group">
+                        <h3>Architecture</h3>
+                        <ul>
+                            <li>MVVM and feature-oriented modules</li>
+                            <li>Async state handling and data flow</li>
+                            <li>Testable services and view models</li>
+                        </ul>
+                    </div>
+                    <div class="stack-group">
+                        <h3>Product Quality</h3>
+                        <ul>
+                            <li>Performance checks and UI responsiveness</li>
+                            <li>Debugging complex user journeys</li>
+                            <li>Regression awareness and release readiness</li>
+                        </ul>
+                    </div>
+                    <div class="stack-group">
+                        <h3>Collaboration</h3>
+                        <ul>
+                            <li>Code reviews and documentation</li>
+                            <li>Cross-functional product conversations</li>
+                            <li>Clear communication around tradeoffs</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="projects" id="work" aria-labelledby="work-title">
+            <div class="section-inner">
+                <div class="section-heading">
+                    <div>
+                        <p class="kicker">Selected Work</p>
+                        <h2 id="work-title">Case-study themes from product engineering.</h2>
+                    </div>
+                    <p>
+                        Public portfolio pages often cannot show every internal detail. These themes communicate the kind of iOS problems I have worked through and the way I approach them.
+                    </p>
+                </div>
+                <div class="project-grid">
+                    <article class="project-card">
+                        <div class="project-visual">
+                            <span>Smart Home UX</span>
+                        </div>
+                        <div class="project-body">
+                            <h3>Device control experiences</h3>
+                            <p>Native interfaces for viewing, controlling, and understanding connected devices with immediate feedback and clear fallbacks.</p>
+                            <div class="project-tags">
+                                <span>UIKit</span>
+                                <span>State</span>
+                                <span>Reliability</span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="project-card">
+                        <div class="project-visual">
+                            <span>Automation</span>
+                        </div>
+                        <div class="project-body">
+                            <h3>Rules, routines, and conditions</h3>
+                            <p>Workflows where people compose actions and expect the app to make complex behavior feel readable and safe.</p>
+                            <div class="project-tags">
+                                <span>Swift</span>
+                                <span>Async</span>
+                                <span>UX logic</span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="project-card">
+                        <div class="project-visual">
+                            <span>App Quality</span>
+                        </div>
+                        <div class="project-body">
+                            <h3>Polish in mature codebases</h3>
+                            <p>Feature work, debugging, review, and refinement inside a large iOS app where small details affect many users.</p>
+                            <div class="project-tags">
+                                <span>Architecture</span>
+                                <span>Debugging</span>
+                                <span>Release care</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact" id="contact" aria-labelledby="contact-title">
+            <div class="section-inner">
+                <div class="section-heading">
+                    <div>
+                        <p class="kicker">Contact</p>
+                        <h2 id="contact-title">Let us build something people can rely on.</h2>
+                    </div>
+                    <p>
+                        I am interested in iOS work that values product quality, clear architecture, and thoughtful user experience.
+                    </p>
+                </div>
+                <div class="contact-card">
+                    <div>
+                        <h3>Open to iOS opportunities and collaborations.</h3>
+                        <p>Reach out through GitHub, or replace this section with your email and LinkedIn when you are ready to publish.</p>
+                    </div>
+                    <a class="button primary" href="https://github.com/aarafathh" target="_blank" rel="noreferrer">
+                        Contact on GitHub
+                        <svg aria-hidden="true" viewBox="0 0 24 24">
+                            <path d="M7 17 17 7"></path>
+                            <path d="M9 7h8v8"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-inner">
+            <span>© <span id="year"></span> Arafath Hossain</span>
+            <span>iOS Engineer · SmartThings experience · GitHub Pages</span>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
 </body>
 </html>
